@@ -1,0 +1,6 @@
+nome;urlbase;parametri;minuti
+Google Search;https://www.google.com;;1
+GitHub API;https://api.github.com;;0.5
+HTTPBin Test OK;https://httpbin.org;/get;1
+Test Errore 404;https://httpbin.org;/status/404;0.2
+Test Errore 500;https://httpbin.org;/status/500;0.5
