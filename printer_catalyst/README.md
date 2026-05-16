@@ -20,16 +20,28 @@ Il blocco dello spooler di stampa è storicamente una delle cause principali di 
 
 L'applicazione è concepita secondo il principio del *privilegio minimo* ed evita l'approccio distruttivo dei vecchi script Batch/Bash.
 
-                [ Avvio Utente Standard ]
-                           │
-        ┌──────────────────┴──────────────────┐
-        ▼                                     ▼
- [ OS: Windows ]                       [ OS: Linux ]
-        │                                     │
-(PowerShell Core)                        (Bash/CUPS)
-        │                                     │
-Flush Coda Personale                  Flush Coda Personale
-Kill Processo splwow64                Resume Job ID Utente
+```mermaid
+graph TD
+    Start([Avvio Utente Standard]) --> WIN[OS: Windows]
+    Start --> LIN[OS: Fedora]
+
+    subgraph Ambiente Windows
+    WIN --> PS(PowerShell Core)
+    PS --> W1[Flush Coda Personale]
+    PS --> W2[Kill Processo splwow64]
+    end
+
+    subgraph Ambiente Fedora
+    LIN --> BASH(Bash / CUPS)
+    BASH --> L1[Flush Coda Personale]
+    BASH --> L2[Resume Job ID Utente]
+    end
+
+    style Start fill:#333,stroke:#090,stroke-width:2px
+    style WIN fill:#333,stroke:#900,stroke-width:1px
+    style LIN fill:#333,stroke:#009,stroke-width:1px
+
+```
 
 ---
 
